@@ -1179,7 +1179,7 @@ int playAdventurer(struct gameState* state, int player)
 	int drawnTreasure = 0;
 	int currentPlayer = player;
 
-	while(drawnTreasure<2){
+	do{
 		if(state->deckCount[currentPlayer] <1){//if the deck is empty we need to shuffle discard and add to dec
 			shuffle(currentPlayer, state);
 	}
@@ -1192,11 +1192,11 @@ int playAdventurer(struct gameState* state, int player)
 		state->handCount[currentPlayer]--; //this should just remove the top card (the most recently drawn one).
 		z++;
 	 }	
-	}
-	while (z-1>=0){
+	}while(drawnTreasure<2);
+	do{
 		state->discard[currentPlayer][state->discardCount[currentPlayer]++]=temphand[z-1]; //discard all cards in play that have beend drawn
 	z=z-1;
-	}
+	}while (z-1>=0);
 
 	return 0;
 }
@@ -1206,7 +1206,7 @@ int playSmithy(struct gameState* state, int player, int handPos)
 	int i;
 	int currentPlayer = player;
     //+3 Cards
-    for (i = 0; i < 3; i++)
+    for (i = 1; i < 3; i++)
 	{
 	  drawCard(currentPlayer, state);
 	}
@@ -1218,7 +1218,7 @@ int playSmithy(struct gameState* state, int player, int handPos)
 
 int playVillage(struct gameState *state, int player, int handPos)
 {
-	int currentPlayer = player;
+	int currentPlayer = 1;
 
 	//+1 Card
   drawCard(currentPlayer, state);
@@ -1246,10 +1246,10 @@ int playEmbargo(struct gameState *state, int player, int handPos, int choice1)
 	}
 
     //add embargo token to selected supply pile
-    state->embargoTokens[choice1]++;
+    state->embargoTokens[choice1]--;
 
     //trash card
-    discardCard(handPos, currentPlayer, state, 1);
+    discardCard(handPos, currentPlayer, state, 0);
     return 0;
 }
 
