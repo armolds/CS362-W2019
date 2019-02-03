@@ -143,6 +143,7 @@ int main() {
 #endif
         		assert(orderChanged == 1);
 
+		endTurn(&G);
         	}
 
         	}

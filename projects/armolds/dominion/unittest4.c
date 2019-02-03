@@ -216,7 +216,7 @@ int main() {
         		}
         		printf("--------------------------------\n");
 #endif
-
+		endTurn(&G);
         	}
 
         	//Empty Supply Pile
@@ -254,6 +254,7 @@ int main() {
         	}
         	printf("--------------------------------\n");
 #endif
+	
         }
 
     printf("All tests passed!\n");
