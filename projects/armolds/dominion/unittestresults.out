@@ -1,3 +1,482 @@
+TESTING numHandCards():
+Test player 0 with 1 card(s) in their hand
+G.handCount = 1, expected = 1
+Test player 0 with 2 card(s) in their hand
+G.handCount = 2, expected = 2
+Test player 0 with 3 card(s) in their hand
+G.handCount = 3, expected = 3
+Test player 0 with 4 card(s) in their hand
+G.handCount = 4, expected = 4
+Test player 0 with 5 card(s) in their hand
+G.handCount = 5, expected = 5
+Test player 1 with 1 card(s) in their hand
+G.handCount = 1, expected = 1
+Test player 1 with 2 card(s) in their hand
+G.handCount = 2, expected = 2
+Test player 1 with 3 card(s) in their hand
+G.handCount = 3, expected = 3
+Test player 1 with 4 card(s) in their hand
+G.handCount = 4, expected = 4
+Test player 1 with 5 card(s) in their hand
+G.handCount = 5, expected = 5
+All tests passed!
+TESTING getCost():
+Card great_hall - Cost Should Be = 3
+Cost returned by function: 3
+Card mine - Cost Should Be = 5
+Cost returned by function: 5
+Card baron - Cost Should Be = 4
+Cost returned by function: 4
+Card council room - Cost Should Be = 5
+Cost returned by function: 5
+Card feast - Cost Should Be = 4
+Cost returned by function: 4
+All tests passed!
+TESTING shuffle():
+TESTING PLAYER 0
+Original Deck Count = 5
+Card #0 ID: 1
+Card #1 ID: 1
+Card #2 ID: 4
+Card #3 ID: 4
+Card #4 ID: 4
+Cards have been shuffled 2 times to find a new order.
+Original Deck Count = 5, Shuffled Deck Count = 5.
+New Card Order:
+Card #0 ID: 4
+Card #1 ID: 4
+Card #2 ID: 4
+Card #3 ID: 1
+Card #4 ID: 1
+Other player's cards stayed the same.
+****************************************
+TESTING PLAYER 1
+Original Deck Count = 5
+Card #0 ID: 4
+Card #1 ID: 4
+Card #2 ID: 1
+Card #3 ID: 4
+Card #4 ID: 4
+Cards have been shuffled 1 times to find a new order.
+Original Deck Count = 5, Shuffled Deck Count = 5.
+New Card Order:
+Card #0 ID: 4
+Card #1 ID: 4
+Card #2 ID: 4
+Card #3 ID: 4
+Card #4 ID: 1
+Other player's cards stayed the same.
+****************************************
+All tests passed!
+TESTING gainCard():
+Player 0's Starting Info:
+Number of Cards in Deck: 5
+Number of Cards in Hand: 5
+Number of Cards in Discard: 0
+Card to draw ID: 16
+Starting Supply Pile: 8
+--------------------------------
+	Added card ID 16 to player's hand. 
+	Player's hand increased to 6 cards.
+	Supply count of card is now: 7
+	Deck count did not change.
+	Discard count did not change.
+--------------------------------
+	Added card ID 16 to player's deck. 
+	Player's deck increased to 6 cards.
+	Supply count of card is now: 6
+	Hand count did not change.
+	Discard count did not change.
+--------------------------------
+	Added card ID 16 to player's deck. 
+	Player's discard increased to 6 cards.
+	Supply count of card is now: 5
+	Hand count did not change.
+	Deck count did not change.
+--------------------------------
+	Other Players Deck is the same.
+	Other Players Hand is the same.
+	Other Players Discard is the same.
+--------------------------------
+Card to draw ID: 7
+Starting Supply Pile: 10
+--------------------------------
+	Added card ID 7 to player's hand. 
+	Player's hand increased to 7 cards.
+	Supply count of card is now: 9
+	Deck count did not change.
+	Discard count did not change.
+--------------------------------
+	Added card ID 7 to player's deck. 
+	Player's deck increased to 7 cards.
+	Supply count of card is now: 8
+	Hand count did not change.
+	Discard count did not change.
+--------------------------------
+	Added card ID 7 to player's deck. 
+	Player's discard increased to 7 cards.
+	Supply count of card is now: 7
+	Hand count did not change.
+	Deck count did not change.
+--------------------------------
+	Other Players Deck is the same.
+	Other Players Hand is the same.
+	Other Players Discard is the same.
+--------------------------------
+Card to draw ID: 11
+Starting Supply Pile: 10
+--------------------------------
+	Added card ID 11 to player's hand. 
+	Player's hand increased to 8 cards.
+	Supply count of card is now: 9
+	Deck count did not change.
+	Discard count did not change.
+--------------------------------
+	Added card ID 11 to player's deck. 
+	Player's deck increased to 8 cards.
+	Supply count of card is now: 8
+	Hand count did not change.
+	Discard count did not change.
+--------------------------------
+	Added card ID 11 to player's deck. 
+	Player's discard increased to 8 cards.
+	Supply count of card is now: 7
+	Hand count did not change.
+	Deck count did not change.
+--------------------------------
+	Other Players Deck is the same.
+	Other Players Hand is the same.
+	Other Players Discard is the same.
+--------------------------------
+Player 0's Ending Info:
+Number of Cards in Deck: 8
+Number of Cards in Hand: 8
+Number of Cards in Discard: 3
+Cards Tested: 
+16
+7
+11
+--------------------------------
+Player 1's Starting Info:
+Number of Cards in Deck: 5
+Number of Cards in Hand: 5
+Number of Cards in Discard: 0
+Card to draw ID: 7
+Starting Supply Pile: 7
+--------------------------------
+	Added card ID 7 to player's hand. 
+	Player's hand increased to 6 cards.
+	Supply count of card is now: 6
+	Deck count did not change.
+	Discard count did not change.
+--------------------------------
+	Added card ID 7 to player's deck. 
+	Player's deck increased to 6 cards.
+	Supply count of card is now: 5
+	Hand count did not change.
+	Discard count did not change.
+--------------------------------
+	Added card ID 7 to player's deck. 
+	Player's discard increased to 6 cards.
+	Supply count of card is now: 4
+	Hand count did not change.
+	Deck count did not change.
+--------------------------------
+	Other Players Deck is the same.
+	Other Players Hand is the same.
+	Other Players Discard is the same.
+--------------------------------
+Card to draw ID: 16
+Starting Supply Pile: 5
+--------------------------------
+	Added card ID 16 to player's hand. 
+	Player's hand increased to 7 cards.
+	Supply count of card is now: 4
+	Deck count did not change.
+	Discard count did not change.
+--------------------------------
+	Added card ID 16 to player's deck. 
+	Player's deck increased to 7 cards.
+	Supply count of card is now: 3
+	Hand count did not change.
+	Discard count did not change.
+--------------------------------
+	Added card ID 16 to player's deck. 
+	Player's discard increased to 7 cards.
+	Supply count of card is now: 2
+	Hand count did not change.
+	Deck count did not change.
+--------------------------------
+	Other Players Deck is the same.
+	Other Players Hand is the same.
+	Other Players Discard is the same.
+--------------------------------
+Card to draw ID: 11
+Starting Supply Pile: 7
+--------------------------------
+	Added card ID 11 to player's hand. 
+	Player's hand increased to 8 cards.
+	Supply count of card is now: 6
+	Deck count did not change.
+	Discard count did not change.
+--------------------------------
+	Added card ID 11 to player's deck. 
+	Player's deck increased to 8 cards.
+	Supply count of card is now: 5
+	Hand count did not change.
+	Discard count did not change.
+--------------------------------
+	Added card ID 11 to player's deck. 
+	Player's discard increased to 8 cards.
+	Supply count of card is now: 4
+	Hand count did not change.
+	Deck count did not change.
+--------------------------------
+	Other Players Deck is the same.
+	Other Players Hand is the same.
+	Other Players Discard is the same.
+--------------------------------
+Player 1's Ending Info:
+Number of Cards in Deck: 8
+Number of Cards in Hand: 8
+Number of Cards in Discard: 3
+Cards Tested: 
+7
+16
+11
+--------------------------------
+Testing adding a card from an empty supply pile: 
+Original Supply Count of Adventurer: 4
+Supply Count of Adventurer: 0
+Card was NOT successfully added.
+--------------------------------
+Testing adding a card not included in game: 
+Trying to add ambassador...
+Card was NOT successfully added.
+--------------------------------
+All tests passed!
+TESTING Smithy:
+-------------------------
+Testing Player 0.
+Added Smithy to current hand. Hand Count = 6.
+Smithy supply count decreased by 1. 
+Playing Smithy...
+Smithy was played successfully.
+Smithy is no longer in player's hand.
+Player should have 8 cards in their hand (original hand - Smithy + 3)
+Player has 7 cards in their hand. TEST FAILED 163 cardtest1.c 
+Player has 1 card(s) in their played card pile. 
+Played card is a Smithy.
+Player has 3 card(s) in their deck (should be 2). TEST FAILED 214 cardtest1.c
+All new cards came from original deck.
+Other player's state did not change. 
+Supply Counts of all Victory Cards remained the same. 
+Supply Counts of all Kingdom Cards remained the same. 
+-------------------------
+Testing Player 1.
+Added Smithy to current hand. Hand Count = 6.
+Smithy supply count decreased by 1. 
+Playing Smithy...
+Smithy was played successfully.
+Smithy is no longer in player's hand.
+Player should have 8 cards in their hand (original hand - Smithy + 3)
+Player has 7 cards in their hand. TEST FAILED 163 cardtest1.c 
+Player has 1 card(s) in their played card pile. 
+Played card is a Smithy.
+Player has 3 card(s) in their deck (should be 2). TEST FAILED 214 cardtest1.c
+All new cards came from original deck.
+Other player's state did not change. 
+Supply Counts of all Victory Cards remained the same. 
+Supply Counts of all Kingdom Cards remained the same. 
+4 test(s) failed.
+TESTING Adventurer:
+-------------------------
+Testing Player 0.
+Added Adventurer to current hand. Hand Count = 6.
+Adventurer supply count decreased by 1. 
+Playing Adventurer...
+Adventurer was played successfully.
+Adventurer remains in player's hand. TEST FAILED 149, cardtest2.c
+Player should have 7 cards in their hand (original hand 6 - Adventurer + 2 Treasure)
+Player has 8 cards in their hand. TEST FAILED 169 cardtest2.c 
+Player has 0 card(s) in their played card pile. TEST FAILED 186 cardtest2.c
+Player has 3 card(s) in their deck (used to have 5). 
+Cards added were Treasure cards. 
+New Card 7 does NOT come from original deck. TEST FAILED 270 cardtest2.c
+Other player's state did not change. 
+Supply Counts of all Victory Cards remained the same. 
+Supply Counts of all Kingdom Cards remained the same. 
+3 test(s) failed.
+TESTING Steward:
+-------------------------
+Testing Steward Option 1.
+Added Steward to current hand. Hand Count = 6.
+Steward supply count decreased by 1. 
+Playing Steward...
+Steward was played successfully.
+Steward is no longer in player's hand.
+Steward is in played card pile.
+Player drew 2 cards successfully.
+New cards come from original deck.
+Other player's state did not change. 
+Supply Counts of all Victory Cards remained the same. 
+Supply Counts of all Kingdom Cards remained the same. 
+-------------------------
+Testing Steward Option 2.
+Added Steward to current hand. Hand Count = 6.
+Steward supply count decreased by 1. 
+Playing Steward...
+Steward was played successfully.
+Steward is no longer in player's hand.
+Steward is in played card pile.
+Player DID NOT gain 2 coins. Has 3 coins (should be 5). TEST FAILED 238 cardtest3.c
+Hand count decreased by 1 (Steward).
+Deck count stayed the same.
+Discard count stayed the same.
+Other player's state did not change. 
+Supply Counts of all Victory Cards remained the same. 
+Supply Counts of all Kingdom Cards remained the same. 
+-------------------------
+Testing Steward Option 3.
+Added Steward to current hand. Hand Count = 6.
+Steward supply count decreased by 1. 
+Playing Steward...
+Steward was played successfully.
+Steward remains in player's hand. TEST FAILED 164, cardtest3.c
+2 Cards + Steward were removed from hand. 
+2 Cards + Steward were NOT added to discard. TEST FAILED 326 cardtest3.c
+Other player's state did not change. 
+Supply Counts of all Victory Cards remained the same. 
+Supply Counts of all Kingdom Cards remained the same. 
+3 test(s) failed.
+TESTING Village:
+-------------------------
+Testing Player 0.
+Added Village to current hand. Hand Count = 6.
+Village supply count decreased by 1. 
+Playing Village...
+Village was played successfully.
+Village remains in player's hand. TEST FAILED 168, cardtest4.c
+Player did NOT receive a new card.  Kept Village in hand. TEST FAILED 192, cardtest4.c
+Player has 2 more actions.
+Other player's state changed. TEST FAILED 228 cardtest4.c
+Supply Counts of all Victory Cards remained the same. 
+Supply Counts of all Kingdom Cards remained the same. 
+-------------------------
+Testing Player 1.
+Added Village to current hand. Hand Count = 6.
+Village supply count decreased by 1. 
+Playing Village...
+Village was played successfully.
+Village is no longer in player's hand.
+Village is in played card pile.
+Player received one new card. 
+Player has 2 more actions.
+Other player's state did not change. 
+Supply Counts of all Victory Cards remained the same. 
+Supply Counts of all Kingdom Cards remained the same. 
+3 test(s) failed.
+/***********************************
+*				   *
+*	GCov Info Starting	   *
+*				   *
+***********************************/
+File 'dominion.c'
+Lines executed:39.08% of 563
+Creating 'dominion.c.gcov'
+
+File 'dominion.c'
+Lines executed:39.08% of 563
+Branches executed:39.09% of 417
+Taken at least once:24.94% of 417
+Calls executed:32.63% of 95
+Creating 'dominion.c.gcov'
+
+Function 'updateCoins'
+Lines executed:81.82% of 11
+
+Function 'gainCard'
+Lines executed:100.00% of 13
+
+Function 'discardCard'
+Lines executed:100.00% of 13
+
+Function 'playGreatHall'
+Lines executed:0.00% of 6
+
+Function 'playEmbargo'
+Lines executed:0.00% of 8
+
+Function 'playVillage'
+Lines executed:100.00% of 6
+
+Function 'playSmithy'
+Lines executed:100.00% of 6
+
+Function 'playAdventurer'
+Lines executed:77.78% of 18
+
+Function 'cardEffect'
+Lines executed:9.18% of 207
+
+Function 'getCost'
+Lines executed:23.33% of 30
+
+Function 'drawCard'
+Lines executed:95.45% of 22
+
+Function 'getWinners'
+Lines executed:0.00% of 24
+
+Function 'scoreFor'
+Lines executed:0.00% of 24
+
+Function 'isGameOver'
+Lines executed:0.00% of 10
+
+Function 'endTurn'
+Lines executed:100.00% of 20
+
+Function 'whoseTurn'
+Lines executed:100.00% of 2
+
+Function 'fullDeckCount'
+Lines executed:0.00% of 9
+
+Function 'supplyCount'
+Lines executed:100.00% of 2
+
+Function 'handCard'
+Lines executed:100.00% of 3
+
+Function 'numHandCards'
+Lines executed:100.00% of 2
+
+Function 'buyCard'
+Lines executed:0.00% of 13
+
+Function 'playCard'
+Lines executed:71.43% of 14
+
+Function 'shuffle'
+Lines executed:93.75% of 16
+
+Function 'initializeGame'
+Lines executed:83.87% of 62
+
+Function 'kingdomCards'
+Lines executed:0.00% of 13
+
+Function 'newGame'
+Lines executed:0.00% of 3
+
+Function 'compare'
+Lines executed:100.00% of 6
+
+File 'dominion.c'
+Lines executed:39.08% of 563
+Creating 'dominion.c.gcov'
+
         -:    0:Source:dominion.c
         -:    0:Graph:dominion.gcno
         -:    0:Data:dominion.gcda

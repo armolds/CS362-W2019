@@ -1,10 +1,13 @@
 /* -----------------------------------------------------------------------
- * Unit Test for Smithy Card
+ * Unit Test for Adventurer Card
  *GOALS:
-*	1. Current player receives exactly 3 cards.
-*	2. 3 cards come from own deck.
-*	3. No state change occurs for other players.
-*	4. No state change should occur to the victory card piles and kingdom card piles OTHER THAN when Smithy is gained.
+*	1. Current player ends up with 2 Treasure cards
+*	2. Cards should come from own deck
+*	3. Discard pile should increase
+*	4. Hand should increase by 2
+*	5. Played should increase by 1
+*	6. No state change occurs for other players.
+*	7. No state change should occur to the victory card piles and kingdom card piles OTHER THAN when Adventurer is gained.
 * -----------------------------------------------------------------------*/
 
 #include "dominion.h"
@@ -18,6 +21,10 @@
 
 // set NOISY_TEST to 0 to remove printfs from output
 #define NOISY_TEST 1
+
+// set PLAYS to determine how many times to test (1 or 2)
+#define PLAYS 1
+
 
 int assertTrue(int a, int b)
 {
@@ -39,21 +46,22 @@ int main() {
     int r;
     int shouldHaveCards = 0;
     int currentPlayer, otherPlayer = 0;
-    int smithyPos;
+    int adventurerPos;
     int failure;
     int matches[3] = {0, 0, 0};
     int noMatch = 0;
-    int failedCount = 0;
+    int cardIsTreasure = 0;
+    int failureCount = 0;
     int k[10] = {adventurer, council_room, feast, gardens, mine
                , remodel, smithy, village, baron, great_hall};
     struct gameState G, copyG;
-    printf ("TESTING Smithy:\n");
+    printf ("TESTING Adventurer:\n");
 
         memset(&G, 23, sizeof(struct gameState));   // clear the game state
         r = initializeGame(numPlayer, k, seed, &G); // initialize a new game
         if (r == 0) {
         	//test for each player in the game
-        	for(i = 0; i < numPlayer; i++) {
+        	for(i = 0; i < PLAYS; i++) {
         		currentPlayer = i;
         		if(currentPlayer == 0)
         		{
@@ -63,111 +71,109 @@ int main() {
         		{
         			otherPlayer = 0;
         		}
+
 #if (NOISY_TEST == 1)
         		printf("-------------------------\n");
         		printf("Testing Player %d.\n", i);
 #endif
 
+        		//add adventurer to players hand
+        		gainCard(adventurer, &G, 2, i);
+
+#if (NOISY_TEST == 1)
+        		printf("Added Adventurer to current hand. Hand Count = %d.\n", G.handCount[i]);
+#endif
+
         		//copy entire game to compare to later
         		memcpy(&copyG, &G, sizeof(struct gameState));
 
-        		//add Smithy to players hand
-        		gainCard(smithy, &G, 2, i);
-#if (NOISY_TEST == 1)
-        		printf("Added Smithy to current hand. Hand Count = %d.\n", G.handCount[i]);
-#endif
-
-        		//expecting hand count to increase correctly
-        		copyG.handCount[i]++;
-
         		//was supply pile decreased?
-        		if(assertTrue(copyG.supplyCount[smithy] - 1, G.supplyCount[smithy]))
+        		if(assertTrue(copyG.supplyCount[adventurer], G.supplyCount[adventurer]))
         		{
 #if (NOISY_TEST == 1)
-        			printf("Smithy supply count decreased by 1. \n");
+        			printf("Adventurer supply count decreased by 1. \n");
 #endif
         		}
         		else
         		{
 #if (NOISY_TEST == 1)
-        			printf("Smithy supply count did not decrease by 1. TEST FAILED %d %s\n", __LINE__, __FILE__);
+        			printf("Adventurer supply count did not decrease by 1. TEST FAILED %d %s\n", __LINE__, __FILE__);
 #endif
         			failure = 1;
-        			failedCount++;
+        			failureCount++;
         		}
 
-        		//Find smithy's position
-        	    smithyPos = -1;
+        		//Find adventurer's position
+        	    adventurerPos = -1;
         	    for (j = 0; j < numHandCards(&G); j++) {
-        	    	if (handCard(j, &G) == smithy)
-        	    smithyPos = j;
+        	    	if (handCard(j, &G) == adventurer)
+        	    adventurerPos = j;
         	    }
 
-        	    //Play smithy
+        	    //Play adventurer
         	    int success = 0;
 #if (NOISY_TEST == 1)
-        	    printf("Playing Smithy...\n");
+        	    printf("Playing Adventurer...\n");
 #endif
-        	    success = playCard(smithyPos, 0, 0, 0, &G);
+        	    success = playCard(adventurerPos, 0, 0, 0, &G);
         		if (assertTrue(success, 0))
         		{
 #if (NOISY_TEST == 1)
-        			printf("Smithy was played successfully.\n");
+        			printf("Adventurer was played successfully.\n");
 #endif
         		}
-        		else
+        			else
         			{
 #if (NOISY_TEST == 1)
-        			printf("Smithy was NOT played successfully. TEST FAILED %d %s\n", __LINE__, __FILE__);
+        			printf("Adventurer was NOT played successfully. TEST FAILED %d %s\n", __LINE__, __FILE__);
 #endif
         			failure = 1;
-        			failedCount++;
+        			failureCount++;
         			}
 
-        		//smithy should not be in hand (is now discarded to "played cards")
-        	    smithyPos = -1;
+        		//adventurer should not be in hand (is now discarded to "played cards")
+        	    adventurerPos = -1;
         	    for (j = 0; j < numHandCards(&G); j++) {
-        	    	if (handCard(j, &G) == smithy)
-        	    smithyPos = j;
+        	    	if (handCard(j, &G) == adventurer)
+        	    adventurerPos = j;
         	    }
-        	    if (assertTrue(smithyPos, -1))
+        	    if (assertTrue(adventurerPos, -1))
         	    {
 #if (NOISY_TEST == 1)
-        	    	printf("Smithy is no longer in player's hand.\n");
+        	    	printf("Adventurer is no longer in player's hand.\n");
 #endif
         	    }
         	    	else
         	    	{
 #if (NOISY_TEST == 1)
-        	    	printf("Smithy remains in player's hand. TEST FAILED %d, %s\n", __LINE__, __FILE__);
+        	    	printf("Adventurer remains in player's hand. TEST FAILED %d, %s\n", __LINE__, __FILE__);
 #endif
         	    	failure = 1;
-        	    	failedCount++;
+        	    	failureCount++;
         	    	}
 
-        		//should have 3 new cards in hard
-        		shouldHaveCards = copyG.handCount[i] - 1 + 3;
+        		//should have 2 new cards in hard
+        		shouldHaveCards = copyG.handCount[i] - 1 + 2;
 #if (NOISY_TEST == 1)
-        		printf("Player should have %d cards in their hand (original hand - Smithy + 3)\n", shouldHaveCards);
+        		printf("Player should have %d cards in their hand (original hand %d - Adventurer + 2 Treasure)\n", shouldHaveCards, copyG.handCount[i]);
 #endif
-
         		if(assertTrue(G.handCount[i], shouldHaveCards))
         		{
 #if (NOISY_TEST == 1)
         			printf("Player has %d cards in their hand. \n", G.handCount[i]);
 #endif
-        			}
-        		else
+        		}
+        			else
         			{
 #if (NOISY_TEST == 1)
         			printf("Player has %d cards in their hand. TEST FAILED %d %s \n", G.handCount[i], __LINE__, __FILE__);
 #endif
         			failure = 1;
-        			failedCount++;
+        			failureCount++;
         			}
 
 
-        		//should have 1 new playedCard, card should be Smithy
+        		//should have 1 new playedCard, card should be Adventurer
         		if(assertTrue(copyG.playedCardCount + 1, G.playedCardCount))
         		{
 #if (NOISY_TEST == 1)
@@ -180,43 +186,67 @@ int main() {
         			printf("Player has %d card(s) in their played card pile. TEST FAILED %d %s\n", G.playedCardCount, __LINE__, __FILE__);
 #endif
         			failure = 1;
-        			failedCount++;
+        			failureCount++;
         		}
         		for(j = 0; j < G.playedCardCount; j++)
         		{
-        			if(G.playedCards[j]== smithy)
-				{
+        			if(G.playedCards[j]== adventurer)
+        			{
 #if (NOISY_TEST == 1)
-        				printf("Played card is a Smithy.\n");
+        				printf("Played card is a Adventurer.\n");
 #endif
-				}
-        			else
+        			}
+        				else
 						{
 #if (NOISY_TEST == 1)
-        				printf("Played card was NOT a Smithy. TEST FAILED %d %s\n", __LINE__, __FILE__);
+							printf("Played card was NOT a Adventurer. TEST FAILED %d %s\n", __LINE__, __FILE__);
 #endif
-        				failure = 1;
-        				failedCount++;
+							failure = 1;
+							failureCount++;
 						}
         		}
 
-        		//should have 3 less deck cards
-        		if(assertTrue(copyG.deckCount[i] - 3, G.deckCount[i]))
+        		//should have less deck cards
+        		if((G.deckCount[i] < copyG.deckCount[i]))
         		{
 #if (NOISY_TEST == 1)
-        			printf("Player has %d card(s) in their deck. \n", G.deckCount[i]);
+        			printf("Player has %d card(s) in their deck (used to have %d). \n", G.deckCount[i], copyG.deckCount[i]);
 #endif
         		}
         		else
         		{
 #if (NOISY_TEST == 1)
-        			printf("Player has %d card(s) in their deck (should be %d). TEST FAILED %d %s\n", G.deckCount[i],
-        					copyG.deckCount[i] - 3,__LINE__, __FILE__);
+        			printf("Player has %d card(s) in their deck (should be less than %d). TEST FAILED %d %s\n", G.deckCount[i],
+        					copyG.deckCount[i], __LINE__, __FILE__);
 #endif
         			failure = 1;
-        			failedCount++;
+        			failureCount++;
         		}
 
+        		//find out what the new cards are (should be last 2)
+        		cardIsTreasure = 1;
+        		for(j = G.handCount[i] - 2; j < G.handCount[i]; j++)
+        		{
+        			if((assertTrue(G.hand[i][j], copper) == 0 && assertTrue(G.hand[i][j], silver) == 0 &&
+        					assertTrue(G.hand[i][j], gold) == 0))
+        			{
+        				cardIsTreasure = 0;
+        				failure = 1;
+        				failureCount++;
+        			}
+
+        		}
+
+#if (NOISY_TEST == 1)
+        		if(cardIsTreasure == 1)
+        		{
+        			printf("Cards added were Treasure cards. \n");
+        		}
+        		else
+        		{
+        			printf("Cards added were NOT all Treasure cards. TEST FAILED %d %s\n", __LINE__, __FILE__);
+        		}
+#endif
 
         		//new cards come from own deck
 
@@ -238,19 +268,14 @@ int main() {
         			{
 #if (NOISY_TEST == 1)
         				printf("New Card %d does NOT come from original deck. TEST FAILED %d %s\n", G.hand[i][m], __LINE__, __FILE__);
-#endif
-        				failure = 1;
-        				failedCount++;
+#endif     
+   				failure = 1;
         				noMatch = 1;
         			}
         		}
 
         		if(assertTrue(noMatch, 0))
-        			{
-#if (NOISY_TEST == 1)
         			printf("All new cards came from original deck.\n");
-#endif
-        			}
 
         		//Did the other player's info change?
         		if (assertTrue(copyG.deckCount[otherPlayer], G.deckCount[otherPlayer]) &&
@@ -261,13 +286,13 @@ int main() {
         			printf("Other player's state did not change. \n");
 #endif
         		}
-        		else
+        			else
         		{
 #if (NOISY_TEST == 1)
         			printf("Other player's state changed. TEST FAILED %d %s\n", __LINE__, __FILE__);
 #endif
         			failure = 1;
-        			failedCount++;
+        			failureCount++;
         		}
 
         		//did victory cards change?
@@ -292,13 +317,13 @@ int main() {
         		for(j = 0; j < 10; j++)
         		{
         			if(assertTrue(copyG.supplyCount[k[j]], G.supplyCount[k[j]]) == 0 &&
-        					k[j] != smithy)
+        					k[j] != adventurer)
         			{
 #if (NOISY_TEST == 1)
         				printf("Card #%d supply count has changed. TEST FAILED %d %s\n", k[j], __LINE__, __FILE__);
 #endif
         				failure = 1;
-        				failedCount++;
+        				failureCount++;
         				noMatch = 1;
         			}
         		}
@@ -318,7 +343,7 @@ int main() {
         if(failure == 0)
         	printf("All tests passed!\n");
         else
-        	printf("%d test(s) failed.\n", failedCount);
+        	printf("%d test(s) failed.\n", failureCount);
 
     return 0;
 }
