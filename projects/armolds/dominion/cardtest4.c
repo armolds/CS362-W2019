@@ -1,12 +1,12 @@
 /* -----------------------------------------------------------------------
- * Unit Test for Steward Card
+ * Unit Test for Village Card
  *GOALS:
 *	1. Current Player receives +1 card and +2 actions
 *	2. Village should move to played cards pile
 *	3. Deck should decrease by 1
 *	4. Hand count should stay the same (+1 card - 1 village)
 *	5. No state change occurs for other players.
-*	6. No state change should occur to the victory card piles and kingdom card piles OTHER THAN when Adventurer is gained.
+*	6. No state change should occur to the victory card piles and kingdom card piles OTHER THAN when Village is gained.
 * -----------------------------------------------------------------------*/
 
 #include "dominion.h"
