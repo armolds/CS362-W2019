@@ -18,8 +18,8 @@
 #include <math.h>
 
 #define DEBUG 0
-#define NOISY_TEST 0
-#define PRINT_COUNTER 0
+#define NOISY_TEST 1
+#define PRINT_COUNTER 1
 #define NUM_TESTS 2000
 
 int assertTrue(int a, int b)
@@ -161,6 +161,7 @@ int main () {
 #endif
 
     failCount += checkVillageCard(p, &G);
+
   }
 
 if(failCount > 0)
