@@ -668,9 +668,13 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
     {
     case adventurer:
       cardAdventurer(state);
+      return 0;
+      break;
 
     case council_room:
       cardCouncilRoom(state, handPos);
+      return 0;
+      break;
 
     case feast:
       //gain card with cost up to 5
@@ -791,9 +795,13 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
 
     case smithy:
       cardSmithy(state, handPos);
+      return 0;
+      break;
 
     case village:
       cardVillage(state, handPos);
+      return 0;
+      break;
 
     case baron:
       state->numBuys++;//Increase buys by 1!
@@ -848,6 +856,8 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
 
     case great_hall:
       cardGreatHall(state, handPos);
+      return 0;
+      break;
 
     case minion:
       //+1 action
